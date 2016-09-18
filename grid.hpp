@@ -18,17 +18,26 @@ using namespace std;
 
 /*
  * class that contains a 9 x 9 grid Sodoku problem
- * its data member has a 2D vector containging the grid information
+ * original_grid_ is the grid that the user has input, serving as a helper grid
+ * solve_grid is the grid that the alg is working on
  * its methods include various algorithm to solve the problem
  *                     and different helper functions
  */
 class Sodoku{
 private:
-    vector< vector<int> > grid_;
+    vector< vector<int> > original_grid_;
+    vector< vector<int> > solve_grid_;
     
 public:
     Sodoku(vector< vector<int> > user_grid);
     
+    
+    bool backtracking();
+    vector< vector<int> > backtrackinghelper(vector<vector<int>> grid);
+    
+    bool win(vector< vector<int> >);
+    bool valid_grid(vector< vector<int> >);
+    bool valid_input(); //check whether the input from the user is valid
     void printGrid();
     
 };
