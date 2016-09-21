@@ -6,9 +6,13 @@
 //  Copyright © 2016年 Henry Zhou. All rights reserved.
 //
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cmath>
 #include "grid.hpp"
 
 using namespace std;
@@ -39,13 +43,31 @@ vector< vector<int> > createSodoku(){
 }
 
 
+//Using the method of backtracking to solve the soduku problem
+void using_backtracking(Sodoku problem){
+    cout << "Using the Alg called: Backtracking" << endl;
+    bool solved = problem.backtracking();
+    if (solved)
+        cout << "Problem Solved" << endl;
+    else
+        cout << "Invalid problem? Please make sure" << endl;
+    problem.printGrid();
+}
+
+
 int main(int argc, const char * argv[]) {
     
+    srand((unsigned)time(NULL));        //setting up the random seed
     Sodoku test(createSodoku());
     
+    test.test_hello();
     test.printGrid();
-    test.backtracking();
+    test.rand_initialize();
     test.printGrid();
+    
+    if (test.win())
+        cout << "The initialization step is done" << endl;
+    
     return 0;
 }
 

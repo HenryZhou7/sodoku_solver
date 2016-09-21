@@ -42,22 +42,15 @@ bool Sodoku::backtracking(){
     
 }
 
-vector< vector<int> > Sodoku::backtrackinghelper(vector< vector<int> > grid){
-    
-    return grid;
-    
-}
-
 
 //a weaker condition where you win the game
 //see if each digit from 1 to 9 appears exactly nine times
-bool Sodoku::win(vector< vector<int> > grid){
+bool Sodoku::win(){
     vector<int> accum(9, 0);
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
-            if (grid[i][j] == 0)
-                continue;
-            accum[grid[i][j] - 1]++;
+            if (solve_grid_[i][j] != 0)
+                accum[solve_grid_[i][j] - 1]++;
         }
     }
     for (int i = 0; i < 9; i++)

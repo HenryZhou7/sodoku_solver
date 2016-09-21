@@ -31,11 +31,18 @@ private:
 public:
     Sodoku(vector< vector<int> > user_grid);
     
-    
+    //the method of backtracking
     bool backtracking();
     vector< vector<int> > backtrackinghelper(vector<vector<int>> grid);
     
-    bool win(vector< vector<int> >);
+    //using simulated anneling to solve sodoku and some helper functions
+    void test_hello();
+    void sa_solve();
+    void rand_initialize();
+    double cost();
+    
+    //other very general functions
+    bool win();
     bool valid_grid(vector< vector<int> >);
     bool valid_input(); //check whether the input from the user is valid
     void printGrid();
