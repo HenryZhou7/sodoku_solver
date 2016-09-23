@@ -14,8 +14,44 @@
 
 using namespace std;
 
+//test for functions writing in a separate file
 void Sodoku::test_hello(){
     cout << "This way works!" << endl;
+}
+
+
+//using simulated annealing to solve the input sodoku problem
+void Sodoku::sa_solve(){
+    
+}
+
+
+//randomly choose newly filled two slots for swapping
+//the returned vector consists of element x1 y1 x2 y2
+vector<int> Sodoku::random_swap(){
+    vector<int> result(4, 0);
+    
+    //choose x1, y1
+    int x1;
+    int y1;
+    do{
+        x1 = rand() % 9;
+        y1 = rand() % 9;
+    }while (original_grid_[x1][y1] != 0);
+    result[0] = x1;
+    result[1] = y1;
+    
+    //choose x2, y2
+    int x2;
+    int y2;
+    do{
+        x2 = rand() % 9;
+        y2 = rand() % 9;
+    }while (original_grid_[x2][y2] != 0);
+    result[2] = x2;
+    result[3] = y2;
+    
+    return result;
 }
 
 

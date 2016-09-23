@@ -40,6 +40,7 @@ public:
     void sa_solve();
     void rand_initialize();
     double cost();
+    vector<int> random_swap();
     
     //other very general functions
     bool win();

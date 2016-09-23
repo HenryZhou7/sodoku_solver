@@ -60,7 +60,8 @@ int main(int argc, const char * argv[]) {
     srand((unsigned)time(NULL));        //setting up the random seed
     Sodoku test(createSodoku());
     
-    test.test_hello();
+    
+    
     test.printGrid();
     test.rand_initialize();
     test.printGrid();
