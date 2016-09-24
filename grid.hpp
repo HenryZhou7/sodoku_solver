@@ -41,6 +41,7 @@ public:
     void rand_initialize();
     double cost();
     vector<int> random_swap();
+    void swap_two_slots(vector<int>);
     
     //other very general functions
     bool win();

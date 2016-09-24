@@ -61,13 +61,18 @@ int main(int argc, const char * argv[]) {
     Sodoku test(createSodoku());
     
     
-    
     test.printGrid();
     test.rand_initialize();
     test.printGrid();
     
     if (test.win())
         cout << "The initialization step is done" << endl;
+    
+    test.sa_solve();
+    
+    cout << "The SA alg result" << endl;
+    test.printGrid();
+    
     
     return 0;
 }

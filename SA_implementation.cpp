@@ -12,6 +12,8 @@
 #include <cmath>
 #include "grid.hpp"
 
+#define SWAP_THRESHOLD 0.90
+
 using namespace std;
 
 //test for functions writing in a separate file
@@ -23,6 +25,49 @@ void Sodoku::test_hello(){
 //using simulated annealing to solve the input sodoku problem
 void Sodoku::sa_solve(){
     
+    //first randomly initialize the grid
+    this->rand_initialize();
+    
+    double prev_cost = this->cost();
+    while (this->cost() != 0){
+        
+        //randomly choose two slots and swap them
+        vector<int> swap_coord = this->random_swap();
+        this->swap_two_slots(swap_coord);
+        
+        //if the swaping is making the overall grid better, then keep it
+        if (this->cost() < prev_cost){
+            prev_cost = this->cost();
+            continue;
+        }
+        else{   //otherwise, have a certain chance to switch back to the previous
+            double rand_val = rand() % 100 / 100.0;
+            if (rand_val >= SWAP_THRESHOLD){     //switching back to the original state
+                this->swap_two_slots(swap_coord);
+                continue;
+            }
+            else{   //keep the current state
+                prev_cost = this->cost();
+                continue;
+            }
+        }
+        
+    }
+    
+}
+
+
+//swap two elements in the whole grid
+//take in a vector indicating corresponding coordinates (x1, y1) and (x2, y2)
+void Sodoku::swap_two_slots(vector<int> coord){
+    int x1 = coord[0];
+    int y1 = coord[1];
+    int x2 = coord[2];
+    int y2 = coord[3];
+    
+    int temp = solve_grid_[x1][y1];
+    solve_grid_[x1][y1] = solve_grid_[x2][y2];
+    solve_grid_[x2][y2] = temp;
 }
 
 
@@ -97,7 +142,7 @@ double Sodoku::cost(){
             temp_sum += solve_grid_[i][j];
         sum += (temp_sum - 45) * (temp_sum - 45);
     }
-    cout << sum << endl;
+    
     //finding all the col sum
     for (int j = 0; j < 9; j++){
         double temp_sum = 0;
@@ -105,7 +150,7 @@ double Sodoku::cost(){
             temp_sum += solve_grid_[i][j];
         sum += (temp_sum - 45) * (temp_sum - 45);
     }
-    cout << sum << endl;
+    
     //finding all the block sum
     for (int p = 0; p < 3; p++){
         for (int q = 0; q < 3; q++){
